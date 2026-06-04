@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LLM Text Generation Interface — Generate AI-powered text using DistilGPT2 via a beautiful web interface.">
+    <title>LLM Studio — AI Text Generation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header" id="app-header">
+            <div class="header-left">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2L26 8V20L14 26L2 20V8L14 2Z" stroke="url(#logo-grad)" stroke-width="2" fill="none"/>
+                        <path d="M14 8L20 11V17L14 20L8 17V11L14 8Z" fill="url(#logo-grad)" opacity="0.6"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="2" y1="2" x2="26" y2="26">
+                                <stop offset="0%" stop-color="#818cf8"/>
+                                <stop offset="100%" stop-color="#c084fc"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1>LLM Studio</h1>
+                    <span class="header-badge">DistilGPT2</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator" id="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Area -->
+        <main class="chat-area" id="chat-area">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-icon">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="30" stroke="url(#welcome-grad)" stroke-width="2" opacity="0.3"/>
+                        <circle cx="32" cy="32" r="20" stroke="url(#welcome-grad)" stroke-width="2" opacity="0.5"/>
+                        <circle cx="32" cy="32" r="10" fill="url(#welcome-grad)" opacity="0.7"/>
+                        <defs>
+                            <linearGradient id="welcome-grad" x1="0" y1="0" x2="64" y2="64">
+                                <stop offset="0%" stop-color="#818cf8"/>
+                                <stop offset="50%" stop-color="#c084fc"/>
+                                <stop offset="100%" stop-color="#f472b6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2>What would you like to generate?</h2>
+                <p>Type a prompt below and the AI will continue your text using DistilGPT2.</p>
+                <div class="suggestion-chips">
+                    <button class="chip" id="chip-story" data-prompt="Once upon a time in a distant galaxy">
+                        <span class="chip-icon">📖</span> Tell a story
+                    </button>
+                    <button class="chip" id="chip-code" data-prompt="The future of artificial intelligence is">
+                        <span class="chip-icon">🤖</span> AI future
+                    </button>
+                    <button class="chip" id="chip-poem" data-prompt="Roses are red, violets are blue">
+                        <span class="chip-icon">🎭</span> Write a poem
+                    </button>
+                    <button class="chip" id="chip-science" data-prompt="The most fascinating discovery in science is">
+                        <span class="chip-icon">🔬</span> Science fact
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messages-container"></div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="input-area" id="input-area">
+            <div class="input-wrapper">
+                <div class="input-container">
+                    <textarea 
+                        id="prompt-input" 
+                        placeholder="Enter your prompt..." 
+                        rows="1"
+                        autofocus
+                    ></textarea>
+                    <button class="send-btn" id="send-btn" title="Generate text">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 10L17 3L10 17L9 11L3 10Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span class="model-info">Powered by DistilGPT2 · max 50 tokens</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

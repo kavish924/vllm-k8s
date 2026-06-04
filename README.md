@@ -11,8 +11,12 @@ vllm-k8s/
 │   └── routes.py          # API endpoints (/generate)
 ├── app/
 │   ├── __init__.py
-│   ├── main.py            # FastAPI entrypoint + /health endpoint
+│   ├── main.py            # FastAPI entrypoint + /health + static serving
 │   └── model.py           # DistilGPT2 text generation pipeline
+├── static/
+│   ├── index.html         # LLM Studio chat interface
+│   ├── style.css          # Premium dark-mode styling
+│   └── script.js          # Chat logic & API integration
 ├── docker/
 │   └── Dockerfile         # Multi-stage build with pre-baked model
 ├── k8s/
@@ -27,6 +31,7 @@ vllm-k8s/
 
 ## ✨ Features
 
+- **Web UI (LLM Studio)** — Beautiful dark-mode chat interface with animated backgrounds, suggestion chips, and real-time status
 - **Text Generation** — Generate text using DistilGPT2 via a simple REST API
 - **Health Checks** — Built-in `/health` endpoint for Kubernetes readiness/liveness probes
 - **Optimized Docker Image** — CPU-only PyTorch (~200MB vs ~800MB), model pre-downloaded during build
@@ -97,6 +102,7 @@ kubectl rollout status deployment/llm-app
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+| `GET` | `/` | **LLM Studio** — Web chat interface |
 | `GET` | `/health` | Health check — returns `{"status": "ok"}` |
 | `GET` | `/generate?prompt=<text>` | Generate text from a prompt |
 | `GET` | `/docs` | Swagger UI (auto-generated) |
@@ -114,6 +120,9 @@ curl http://localhost:30007/health
 curl "http://localhost:30007/generate?prompt=Once%20upon%20a%20time"
 # {"response":"Once upon a time, the world was a place of great beauty..."}
 ```
+
+**Web Interface:**
+Open `http://localhost:30007` in your browser to access the LLM Studio chat UI.
 
 ## 🔧 Development
 
@@ -161,6 +170,7 @@ k3d cluster delete llm-cluster
 
 | Component | Technology |
 |-----------|------------|
+| **Frontend** | HTML / CSS / JavaScript |
 | **API Framework** | FastAPI |
 | **LLM Model** | DistilGPT2 (HuggingFace) |
 | **ML Framework** | PyTorch (CPU) |
